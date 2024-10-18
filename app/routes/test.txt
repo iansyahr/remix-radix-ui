@@ -1,0 +1,5 @@
+import type { MetaFunction } from "@remix-run/node";
+import { useState, useEffect } from "react";
+import { useNavigate } from "@remix-run/react"; // if useNavigate from @remix-run/react kinda buggy, you can use "react-router-dom"
+import { Flex, Button, Card, TextField, Box, Container, Heading, Switch } from "@radix-ui/themes";
+import { useTheme } from 'next-themes';
