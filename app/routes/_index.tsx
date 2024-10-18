@@ -1,5 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Flex, Button,Card,TextField,Box,Container,Heading, Switch} from "@radix-ui/themes";
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,6 +11,18 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+    // Ensure the component is mounted to avoid hydration mismatch
+    useEffect(() => {
+      setMounted(true);
+    }, []);
+  
+    if (!mounted) {
+      return null; // Render nothing until mounted
+    }
+
   return (
     <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh"}}>
       <Container size="1">
@@ -22,7 +36,8 @@ export default function Index() {
       </Card>
       </Container>
       <Switch 
-        defaultChecked 
+        defaultChecked={theme === 'dark'}
+        onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')} 
         style={{
           position: 'fixed',
           bottom: '20px',
